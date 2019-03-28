@@ -1,0 +1,125 @@
+{
+    "Voxelyze": {
+        "voxelSize": 0.005,
+        "gravityAcceleration": 1.0,
+        "collisionsEnabled": true,
+        "materials": [
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            },
+            {
+                "youngsModulus": 10000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 1.0,
+                "kineticFriction": 1.0,
+                "collisionDamping": 0.10000000149011612
+            }
+        ],
+        "voxels": [2, 1, 1, 4,
+5, 1, 1, 4,
+2, 4, 1, 4,
+5, 4, 1, 4,
+2, 1, 2, 4,
+5, 1, 2, 4,
+2, 4, 2, 4,
+5, 4, 2, 4,
+2, 1, 3, 4,
+3, 1, 3, 1,
+5, 1, 3, 4,
+6, 1, 3, 0,
+2, 4, 3, 4,
+3, 4, 3, 2,
+5, 4, 3, 4,
+6, 4, 3, 3,
+2, 1, 4, 4,
+3, 1, 4, 4,
+4, 1, 4, 4,
+5, 1, 4, 4,
+6, 1, 4, 4,
+2, 2, 4, 4,
+3, 2, 4, 4,
+4, 2, 4, 4,
+5, 2, 4, 4,
+6, 2, 4, 4,
+2, 3, 4, 4,
+3, 3, 4, 4,
+4, 3, 4, 4,
+5, 3, 4, 4,
+6, 3, 4, 4,
+2, 4, 4, 4,
+3, 4, 4, 4,
+4, 4, 4, 4,
+5, 4, 4, 4,
+6, 4, 4, 4]
+    },
+    "materialOscillation": [
+        {
+            "amplitude": 60.0,
+            "frequency": 1.0,
+            "offset": -0.7261501641082614
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 1.0,
+            "offset": -0.5305467461750453
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 1.0,
+            "offset": 1.4646685409784604
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 1.0,
+            "offset": -0.17823086135481967
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 0.0,
+            "offset": 0.0
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 0.5,
+            "offset": 0.0
+        }
+    ]
+}

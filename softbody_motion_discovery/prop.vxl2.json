@@ -1,0 +1,44 @@
+{
+  "voxelSize": 0.005,
+  "relativeAmbientTemperature": 0,
+  "materials": [
+    {
+      "youngsModulus": 1000.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    },
+    {
+      "youngsModulus": 500.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    },
+    {
+      "youngsModulus": 500.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    },
+    {
+      "youngsModulus": 500.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    },
+    {
+      "youngsModulus": 500.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    },
+    {
+      "youngsModulus": 500.0,
+      "density": 1000.0,
+      "CTE": 0.01
+    }
+  ],
+  "voxels": [
+    0, 0, 0, 0,
+    1, 0, 0, 1,
+    2, 0, 0, 2,
+    3, 0, 0, 3,
+    4, 0, 0, 4,
+    5, 0, 0, 5
+  ]
+}
