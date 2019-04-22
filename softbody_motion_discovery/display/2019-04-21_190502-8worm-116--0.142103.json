@@ -1,0 +1,251 @@
+{
+    "optConfig": {
+        "numMaterials": 8,
+        "optAmp": false,
+        "optFreq": false,
+        "optOff": true
+    },
+    "Voxelyze": {
+        "voxelSize": 0.005,
+        "gravityAcceleration": 1.0,
+        "materials": [
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "0",
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "1",
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "2",
+                "red": 0,
+                "green": 0,
+                "blue": 255,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "3",
+                "red": 255,
+                "green": 255,
+                "blue": 0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "4",
+                "red": 0,
+                "green": 255,
+                "blue": 255,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "5",
+                "red": 255,
+                "green": 0,
+                "blue": 255,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "6",
+                "red": 255,
+                "green": 100,
+                "blue": 0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "7",
+                "red": 100,
+                "green": 255,
+                "blue": 100,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "red": 100,
+                "green": 255,
+                "blue": 255,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            }
+        ],
+        "voxels": [
+            2,
+            5,
+            0,
+            0,
+            3,
+            5,
+            0,
+            1,
+            4,
+            5,
+            0,
+            2,
+            5,
+            5,
+            0,
+            3,
+            6,
+            5,
+            0,
+            4,
+            7,
+            5,
+            0,
+            5,
+            8,
+            5,
+            0,
+            6,
+            9,
+            5,
+            0,
+            7
+        ]
+    },
+    "materialOscillation": [
+        {
+            "amplitude": 60.0,
+            "frequency": 5.0,
+            "offset": 88.15114379872105,
+            "materialNames": [
+                "0"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 5.0,
+            "offset": 1.782917506719457,
+            "materialNames": [
+                "1"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 5.0,
+            "offset": 4.384289728071565,
+            "materialNames": [
+                "2"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 5.0,
+            "offset": 79.03958218464976,
+            "materialNames": [
+                "3"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 10.0,
+            "offset": 7.23120282329997,
+            "materialNames": [
+                "4"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 10.0,
+            "offset": 0.8907974861838603,
+            "materialNames": [
+                "5"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 10.0,
+            "offset": 37.791377824034679,
+            "materialNames": [
+                "6"
+            ]
+        },
+        {
+            "amplitude": 60.0,
+            "frequency": 10.0,
+            "offset": 11.921496247699137,
+            "materialNames": [
+                "7"
+            ]
+        },
+        {
+            "amplitude": 0.0,
+            "frequency": 0.0,
+            "offset": 0.0,
+            "materialNames": []
+        },
+        {
+            "amplitude": 0.0,
+            "frequency": 0.0,
+            "offset": 0.0,
+            "materialNames": []
+        }
+    ]
+}
