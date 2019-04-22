@@ -1,7 +1,7 @@
 # Soft Body Gait Discovery
 In this work, we investigate the question of gait discovery for deformable characters without skeletons. Without skeletons, creatures must rely on volume preservation and muscle contractions for control. We model muscle contractions using combination of both isotropic and non-isotropic expansions of deformable voxels. Each muscle voxel expands and contracts following a sinusoidal schedule which are optimized using CMA-ES to maximize forward movement.
 
-Project webpage: {Placeholder}
+[Project webpage]()
 
 ## Basic Usage
 As of currently, only windows machines are supported. Please open the project with Visual Studio 2017 and run the project.
