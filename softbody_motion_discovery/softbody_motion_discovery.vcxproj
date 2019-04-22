@@ -130,6 +130,7 @@
     <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="SinActivation.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="VX_MeshRender.cpp" />
     <ClCompile Include="JsonIO.cpp" />
     <ClCompile Include="JsonIO.h" />
@@ -139,9 +140,11 @@
     <ClInclude Include="CMADebug.h" />
     <ClInclude Include="cmaesNewLibTest.h" />
     <ClInclude Include="CMATest.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="SinActivation.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="VX_MeshRender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

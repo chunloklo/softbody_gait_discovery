@@ -23,6 +23,7 @@ void Camera::Rotate(double degX, double degY) {
 
 void Camera::Move(Vector3d move) {
 	camOffset += move;
+	//camCenter[0] -= 0.1;
 }
 
 Vector3d Camera::CameraLocation() {

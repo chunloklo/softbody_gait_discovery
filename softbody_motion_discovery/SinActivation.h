@@ -26,9 +26,7 @@ public:
 		readJSON(m);
 	}
 
-	double value(double t) {
-		return sin(2 * M_PI * frequency * t + offset) * amplitude;
-	}
+	double value(double t);
 	void writeJSON(rapidjson::PrettyWriter<rapidjson::StringBuffer>& w);
 
 	bool readJSON(rapidjson::Value& m);

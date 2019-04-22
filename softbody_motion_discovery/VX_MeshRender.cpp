@@ -248,6 +248,7 @@ void CVX_MeshRender::glDraw()
 #ifdef USE_OPEN_GL
 
 	//quads
+	glDepthFunc(GL_LESS);
 	int qCount = quads.size()/4;
 	for (int i=0; i<qCount; i++) {
 		glNormal3d(quadNormals[i*3], quadNormals[i*3+1], quadNormals[i*3+2]);
@@ -255,7 +256,7 @@ void CVX_MeshRender::glDraw()
 		glLoadName(quadVoxIndices[i]); //to enable picking
 
 		glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 1.0f, 1.0f);
+		//glColor3f(1.0f, 1.0f, 1.0f);
 		glVertex3d(vertices[3*quads[4*i]],   vertices[3*quads[4*i]+1],   vertices[3*quads[4*i]+2]);
 		glVertex3d(vertices[3*quads[4*i+1]], vertices[3*quads[4*i+1]+1], vertices[3*quads[4*i+1]+2]);
 		glVertex3d(vertices[3*quads[4*i+2]], vertices[3*quads[4*i+2]+1], vertices[3*quads[4*i+2]+2]);
@@ -267,6 +268,7 @@ void CVX_MeshRender::glDraw()
 
 	}
 
+	glDepthFunc(GL_LEQUAL);
 	//lines
 	glLineWidth(1.0);
 	glBegin(GL_LINES);

@@ -1,0 +1,209 @@
+{
+    "optConfig": {
+        "numMaterials": 5,
+        "optAmp": true,
+        "optFreq": true,
+        "optOff": true
+    },
+    "Voxelyze": {
+        "voxelSize": 0.005,
+        "gravityAcceleration": 1.0,
+        "materials": [
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "0",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "1",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "2",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "3",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 1
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "4",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "5",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "6",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 1000.0,
+                "density": 1000.0,
+                "name": "7",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": 2
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "name": "8",
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            },
+            {
+                "youngsModulus": 100000.0,
+                "density": 1000.0,
+                "CTE": 0.009999999776482582,
+                "staticFriction": 2.0,
+                "kineticFriction": 0.800000011920929,
+                "collisionDamping": 0.10000000149011612,
+                "muscleAxis": -1
+            }
+        ],
+        "voxels": [3, 4, 1, 0,
+4, 4, 1, 0,
+5, 4, 1, 6,
+6, 4, 1, 6,
+3, 5, 1, 0,
+4, 5, 1, 0,
+5, 5, 1, 6,
+6, 5, 1, 6,
+3, 6, 1, 0,
+4, 6, 1, 0,
+5, 6, 1, 6,
+6, 6, 1, 6,
+3, 4, 2, 6,
+4, 4, 2, 6,
+5, 4, 2, 6,
+6, 4, 2, 6,
+3, 5, 2, 6,
+4, 5, 2, 6,
+5, 5, 2, 6,
+6, 5, 2, 6,
+3, 6, 2, 6,
+4, 6, 2, 6,
+5, 6, 2, 6,
+6, 6, 2, 6]
+    },
+    "materialOscillation": [
+        {
+            "amplitude": 1000.0,
+            "frequency": 5.0,
+            "offset": 0.0,
+            "materialNames": [
+                "0"
+            ]
+        },
+        {
+            "amplitude": 72.80245109933489,
+            "frequency": 4.702890450682361,
+            "offset": 8.789498343595426,
+            "materialNames": [
+                "1"
+            ]
+        },
+        {
+            "amplitude": 61.188920801888119,
+            "frequency": 27.634223936003033,
+            "offset": -1.677960134285513,
+            "materialNames": [
+                "2"
+            ]
+        },
+        {
+            "amplitude": 16.483684318792905,
+            "frequency": 28.443904493929816,
+            "offset": -9.955096181277739,
+            "materialNames": [
+                "3"
+            ]
+        },
+        {
+            "amplitude": 55.21653668255669,
+            "frequency": 10.78193739835558,
+            "offset": 2.693704163086613,
+            "materialNames": [
+                "4"
+            ]
+        },
+        {
+            "amplitude": 0.0,
+            "frequency": 10.0,
+            "offset": 1.1079819891918817,
+            "materialNames": []
+        },
+        {
+            "amplitude": 80.0,
+            "frequency": 10.0,
+            "offset": 2.8169720234930106,
+            "materialNames": []
+        },
+        {
+            "amplitude": 80.0,
+            "frequency": 10.0,
+            "offset": 8.023481440165677,
+            "materialNames": []
+        },
+        {
+            "amplitude": 0.0,
+            "frequency": 0.0,
+            "offset": 0.0,
+            "materialNames": []
+        },
+        {
+            "amplitude": 0.0,
+            "frequency": 0.0,
+            "offset": 0.0,
+            "materialNames": []
+        }
+    ]
+}

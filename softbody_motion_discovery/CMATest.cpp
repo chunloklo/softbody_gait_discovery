@@ -59,7 +59,7 @@ double CMATest::fitfun(double const *x, int size, double *arrLoc) {
 
 void CMATest::test() {
 	double fbestever = 0, *xbestever = NULL; // store best solution
-	double fmean;
+	//double fmean;
 	double bestScore = 0;
 	int generations = 0;
 	CMAES<double> evo;
@@ -130,10 +130,10 @@ void CMATest::test() {
 				printf("Started Thread %d\n", i);
 			}
 
-			for (int k = 0; k < ths.size(); k++) {
+			for (unsigned int k = 0; k < ths.size(); k++) {
 				ths[k].join();
 			}
-			for (int k = 0; k < ths.size(); k++) {
+			for (unsigned int k = 0; k < ths.size(); k++) {
 				printf("value: %d, %f\n", k, arFunvals[k]);
 				printf("Thread %d joined\n", k);
 			}

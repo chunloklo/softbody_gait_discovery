@@ -1,22 +1,3 @@
-//#define USE_OPEN_GL
-//#include "VX_MeshRender.h"
-//#include "Voxelyze.h"
-
-//int main() {
-//	CVoxelyze Vx(0.005); //5mm voxels
-//	CVX_Material* pMaterial = Vx.addMaterial(1000000, 1000); //A material with stiffness E=1MPa and density 1000Kg/m^3
-//	CVX_Voxel* Voxel1 = Vx.setVoxel(pMaterial, 0, 0, 0); //Voxel at index x=0, y=0. z=0
-//	CVX_Voxel* Voxel2 = Vx.setVoxel(pMaterial, 1, 0, 0);
-//	CVX_Voxel* Voxel3 = Vx.setVoxel(pMaterial, 2, 0, 0); //Beam extends in the +X direction
-//
-//	Voxel1->external()->setFixedAll(); //Fixes all 6 degrees of freedom with an external condition on Voxel 1
-//	Voxel3->external()->setForce(0, 0, -1); //pulls Voxel 3 downward with 1 Newton of force.
-//	CVX_MeshRender Render(&Vx);
-//	Render.generateMesh();
-//	Render.saveObj("testSave");
-//	for (int i = 0; i < 100; i++) Vx.doTimeStep(); //simulate  100 timesteps.
-//}
-
 //Jeff Chastine
 #include <Windows.h>
 #include <GL\glew.h>
@@ -36,47 +17,87 @@
 #include <iostream>
 #include "CMATest.h"
 #include "JsonIO.h"
+#include "Text.h"
 
 #include "CMADebug.h"
 #include "cmaesNewLibTest.h"
-
+#include"Main.h"
 
 
 using namespace std;
 
+bool pause = false;
 
 Eigen::Vector3d camCenter(0, 0, 0);
 Eigen::Vector3d camOffset(0, 1, .1);
 
 Camera camera(camCenter, camOffset);
 
+enum mode {
+	Optimize,	
+	Display,
+	Replay
+};
+
+const mode MODE = mode::Replay;
+
+const int msec_replay = 1000 / 60;
+double frameTime = 1.0 / 480;
+double recordTime = 2;
+string saveFile = "./replay/dummy.txt";
+string loadFile = "./replay/dummy.txt";
+bool fullScreen = true;
+
 void drawGrid() {
+
 	//dx, dy are thichness parameters of grid
-	float xmin = -50.0, xmax = 50.0, dx = 5.0, x;
-	float ymin = -50.0, ymax = 50.0, dy = 5.0, y;
+	double xmin = -1, xmax = 1, dx = .02;
+	double ymin = -1, ymax = 1, dy = .02;
+
+	//glBegin(GL_QUADS);
+	//glColor3d(1.0, 1.0, 1.0);
+	//glVertex3d(xmin, ymin, -0.00001);
+	//glVertex3d(xmin, ymax, -0.00001);
+	//glVertex3d(xmax, ymax, -0.00001);
+	//glVertex3d(xmax, ymin, -0.00001);
+	//glEnd();
 
 	glBegin(GL_LINES);
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3d(0.0, 0.0, 0.0);
+	for (double x = xmin; x < xmax; x += dx) {
+		glVertex3d(x, ymin, 0.0);
+		glVertex3d(x, ymax, 0.0);
+	}
 
-	glVertex3f(-1, 0, 0.0);
-	glVertex3f(1, 0, 0.0);
-
-	glVertex3f(-1, .1, 0.0);
-	glVertex3f(1, .1, 0.0);
-
-	glVertex3f(-1, -.1, 0.0);
-	glVertex3f(1, -.1, 0.0);
-
-	glVertex3f(0, 1, 0.0);
-	glVertex3f(0, -1, 0.0);
-
-	glVertex3f(-.01, 1, 0.0);
-	glVertex3f(-.01, -1, 0.0);
-
-	glVertex3f(.01, 1, 0.0);
-	glVertex3f(.01, -1, 0.0);
-
+	for (double y = ymin; y < ymax; y += dy) {
+		glVertex3d(xmin, y, 0.0);
+		glVertex3d(xmax, y, 0.0);
+	}
 	glEnd();
+
+
+	//glBegin(GL_LINES);
+	//glColor3d(1.0, 0.0, 0.0);
+
+	//glVertex3d(-1, 0, 0.0);
+	//glVertex3d(1, 0, 0.0);
+
+	//glVertex3d(-1, .1, 0.0);
+	//glVertex3d(1, .1, 0.0);
+
+	//glVertex3d(-1, -.1, 0.0);
+	//glVertex3d(1, -.1, 0.0);
+
+	//glVertex3d(0, 1, 0.0);
+	//glVertex3d(0, -1, 0.0);
+
+	//glVertex3d(-.01, 1, 0.0);
+	//glVertex3d(-.01, -1, 0.0);
+
+	//glVertex3d(.01, 1, 0.0);
+	//glVertex3d(.01, -1, 0.0);
+
+	//glEnd();
 
 }
 
@@ -98,12 +119,12 @@ void changeViewPort(int w, int h)
 	glViewport(0, 0, w, h);
 
 	// Set the correct perspective.
-	gluPerspective(10, ratio, 0, 10000000);
+	gluPerspective(10, ratio, .001, 3);
 	//gluOrtho2D(-10.0, 10.0, -10.0, 10.0);
-	Vector3d camLoc = camera.CameraLocation();
+	Vector3d camLoc = camera.camOffset;
 	Vector3d camcenter = camera.camCenter;
-	gluLookAt(camLoc(0), camLoc(1), camLoc(2),
-		camCenter(0), camCenter(1), camCenter(2),
+	gluLookAt(camera.CameraLocation()(0), camera.CameraLocation()(1), camera.CameraLocation()(2),
+		camera.camCenter(0), camera.camCenter(1), camera.camCenter(2),
 		0.0f, 0.0f, 1.0f);
 	glMatrixMode(GL_MODELVIEW);
 	// Get Back to the Modelview
@@ -111,6 +132,10 @@ void changeViewPort(int w, int h)
 
 double rotSpeed = 0.02;
 double moveSpeed = 0.01;
+Simulation simulation;
+int replayPosition = 0;
+
+
 void processNormalKeys(unsigned char key, int x, int y) {
 
 	if (key == 'q') {
@@ -135,16 +160,27 @@ void processNormalKeys(unsigned char key, int x, int y) {
 		camera.Move(Vector3d(-1 * moveSpeed, 0, 0));
 		
 	}
+	else if (key == 'p') {
+		pause = !pause;
+	}
+	else if (key == 'r') {
+		//simulation.dt = 0;
+		simulation.reset();
+		resetColor();
+		replayPosition = 0;
+	}
+	else if (key == 'u') {
+		simulation.writePosition(saveFile);
+	}
 	changeViewPort(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 }
 
-VectorXd params(4);
 //test material oscillations
 #ifndef M_PI
 #define M_PI (3.1415926535)
 #endif
 
-Simulation simulation;	
+
 CVX_MeshRender meshRender(&simulation.Vx);
 CMATest cmaTest;
 
@@ -161,13 +197,13 @@ ifstream infile;
 string line;
 vector<Simulation::voxelState> states;
 
+bool wrote = false;
+unsigned int msec_simulate = 16;
 
+vector<vector<Simulation::voxelState>> statesHistory;
 void replayInit() {
-	infile = ifstream("./locationSave.txt");
-}
-
-void replay() {
-	if (getline(infile, line))
+	infile = ifstream(loadFile);
+	while (getline(infile, line))
 	{
 		states.clear();
 		istringstream iss(line);
@@ -178,64 +214,112 @@ void replay() {
 			double y = strtof(line.c_str(), 0);
 			getline(iss, line, ' ');
 			double z = strtof(line.c_str(), 0);
+
+			getline(iss, line, ' ');
+			double qw = strtof(line.c_str(), 0);
+			getline(iss, line, ' ');
+			double qx = strtof(line.c_str(), 0);
+			getline(iss, line, ' ');
+			double qy = strtof(line.c_str(), 0);
+			getline(iss, line, ' ');
+			double qz = strtof(line.c_str(), 0);
+
 			getline(iss, line, ' ');
 			double temp = strtof(line.c_str(), 0);
 
-			printf("%f, %f, %f, %f\n", x, y, z, temp);
+			//printf("%f, %f, %f, %f\n", x, y, z, temp);
+			Vec3D<double> p(x, y, z);
+			Quat3D<double> o(qw, qx, qy, qz);
 			Simulation::voxelState s;
-			s.x = x;
-			s.y = y;
-			s.z = z;
-			s.temp = temp;
+			s.position = p;
+			s.orientation = o;
+			s.temperature = temp;
 			states.push_back(s);
-
 		}
-		simulation.setState(&states);
+		statesHistory.push_back(states);
+	}
+}
 
+void replayStep() {
+	if (pause) {
+		return;
 	}
-	else {
-		infile.close();
-		printf("Finished replaying\n");
-	}
+	simulation.setState(&statesHistory[replayPosition]);
+	replayPosition += 1;
+	replayPosition %= statesHistory.size();
 	
 }
 
-bool wrote = false;
-unsigned int msec_simulate = 16;
-void simulate(int value) {
-	//replay();
-	//camera.Rotate(0, .1);
-	//changeViewPort(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
-	simulation.timestep();
-	printf("%f\n", simulation.t);
-	//printf("%f\n", msec_simulate);
-	glutTimerFunc(msec_simulate, simulate, 0);
-	if (simulation.t > 0.1 && wrote == false) {
-		wrote = true;
-		simulation.writePosition("locationSave.txt");
+void replay(int value) {
+	replayStep();
+	glutTimerFunc(msec_replay, replay, 0);
+
+	simulation.storeLocation();
+	if (simulation.locationHistory.size() > 0) {
+		Vector3d camLoc = camera.CameraLocation();
+		Vector3d camcenter = camera.camCenter;
+		camera.camCenter[0] = simulation.locationHistory[simulation.locationHistory.size() - 1][0];
+		camera.camCenter[1] = simulation.locationHistory[simulation.locationHistory.size() - 1][1];
+		//printf("%f, %f\n", simulation.locationHistory[simulation.locationHistory.size() - 1][0], simulation.locationHistory[simulation.locationHistory.size() - 1][1]);
+		changeViewPort(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+		//gluLookAt(camLoc(0), camLoc(1), camLoc(2),
+		//	camCenter(0), camCenter(1), camCenter(2),
+		//	0.0f, 0.0f, 1.0f);	
 	}
+
+
+}
+
+void simulate(int value) {
+	if (pause) {
+		//printf("%i\n", pause);
+		glutTimerFunc(msec_simulate, simulate, 0);
+		return;
+	}
+	simulation.timestep();
+	simulation.record(frameTime);
+	simulation.storeLocation();
+	printf("Time: %f\n", simulation.t);
+
+	if (simulation.t > recordTime && wrote == false) {
+		wrote = true;
+		simulation.writePosition(saveFile);
+	}
+	if (simulation.locationHistory.size() > 0) {
+		Vector3d camLoc = camera.CameraLocation();
+		Vector3d camcenter = camera.camCenter;
+		camera.camCenter[0] = simulation.locationHistory[simulation.locationHistory.size() - 1][0];
+		camera.camCenter[1] = simulation.locationHistory[simulation.locationHistory.size() - 1][1];
+		//printf("%f, %f\n", simulation.locationHistory[simulation.locationHistory.size() - 1][0], simulation.locationHistory[simulation.locationHistory.size() - 1][1]);
+		changeViewPort(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+		//gluLookAt(camLoc(0), camLoc(1), camLoc(2),
+		//	camCenter(0), camCenter(1), camCenter(2),
+		//	0.0f, 0.0f, 1.0f);	
+	}
+	
+
+	glutTimerFunc(msec_simulate, simulate, 0);
+
+	//glutTimerFunc(16, simulate, 0);
 }
 
 void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	drawGrid();
-
-	const std::vector< CVX_Voxel * > *list = simulation.Vx.voxelList();
-	
-
 	meshRender.generateMesh();
 	meshRender.glDraw();
 
-	glBegin(GL_POINTS);
-	//printf("Positions\n");
-	for (int i = 0; i < list->size(); i++) {
-		Vec3D<double> position = (*list)[i]->position();
-		(*list)[i]->enableFloor(true);
-		//printf("x: %f, y: %f, z: %f\n", position.getX(), position.getY(), position.getZ());
-		glVertex3d(position.getX(), position.getZ(), position.getY());
-	}
-	glEnd();
+	//glDisable(GL_DEPTH_TEST);
+	//glColor3d(0., 0., 0.);
+	//unsigned char string[] = "The quick god jumps over the lazy brown fox.";
+	//int w;
+	//w = glutBitmapLength(GLUT_BITMAP_8_BY_13, string);
+	//float x = .5; /* Centre in the middle of the window */
+	//glRasterPos2f(0., 0.);
+
+
 	glutSwapBuffers();
 }
 
@@ -251,12 +335,15 @@ int main(int argc, char* argv[]) {
 	glutInitWindowSize(800, 600);
 	// Create the window with the title "Hello,GL"
 	glutCreateWindow("Hello, GL");
+	if (fullScreen) {
+		glutFullScreen();
+	}
+	
 	// Bind the two functions (above) to respond when necessary
 	glutReshapeFunc(changeViewPort);
 	glutDisplayFunc(render);
+
 	glutIdleFunc(render);
-	glutTimerFunc(msec_simulate, simulate, 0);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glutKeyboardFunc(processNormalKeys);
 
 	// Very important!  This initializes the entry points in the OpenGL driver so we can 
@@ -267,19 +354,47 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	//testLibcmaes();
-	//while (true);
-	//debug();
-	//cmaTest.test();		
-	//CMATest();
+	if (MODE == mode::Optimize) {
+		testLibcmaes();
+	}
 
 	//round to nearest integer
-	msec_simulate = (int) (simulation.Vx.recommendedTimeStep() * 1000.0 + 0.5);
-	printf("timstep %d\n", msec_simulate);
+	if (MODE == mode::Display) {
+		//msec_simulate = (int)(simulation.Vx.recommendedTimeStep() * 1000.0 + 0.5);
+		msec_simulate = 5;
+		printf("timstep %d\n", msec_simulate);
 
-	//JsonIO::save("testSave.json", &simulation);
-	//replayInit();
+		glutTimerFunc(msec_simulate, simulate, 0);
+	}
+
+	if (MODE == mode::Replay) {
+		replayInit();
+		glutTimerFunc(msec_simulate, replay, 0);
+	}
+
+	glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LESS);
+	//glDepthMask(GL_TRUE);
+	//glDepthRange(-10.0f, 10.0f);
+	glClearColor(1.0, 1.0, 1.0, 1.);
+	//glClearDepth(1.0f);
+
+	resetColor();
+
+	meshRender.updateMesh(CVX_MeshRender::viewColoring::MATERIAL);
+	
 
 	glutMainLoop();
 	return 0;
+}
+
+void resetColor() {
+	//for (int i = 0; i < simulation.Vx.materialCount(); i++) {
+	//	simulation.Vx.material(i)->setColor(255, 255, 255);
+	//}
+	//simulation.Vx.material(0)->setColor(250, 0, 0);
+	//simulation.Vx.material(1)->setColor(250, 0, 0);
+	//simulation.Vx.material(2)->setColor(0, 250, 0);
+	//simulation.Vx.material(3)->setColor(0, 250, 0);
+	//simulation.Vx.material(4)->setColor(0, 100, 100);
 }

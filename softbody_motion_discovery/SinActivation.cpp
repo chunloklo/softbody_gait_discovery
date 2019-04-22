@@ -17,7 +17,7 @@ void SinActivation::writeJSON(rapidjson::PrettyWriter<rapidjson::StringBuffer>& 
 	w.EndArray();
 
 	w.EndObject();
-}
+}	
 
 
 bool SinActivation::readJSON(rapidjson::Value& m) {
@@ -39,4 +39,13 @@ bool SinActivation::readJSON(rapidjson::Value& m) {
 	}
 
 	return true;
+}
+
+double SinActivation::value(double t) {
+	double out = sin(2 * M_PI * frequency * t + offset) * amplitude;
+	if (out > 0) {
+		return out;
+	}
+	return 0;
+	//return out;
 }

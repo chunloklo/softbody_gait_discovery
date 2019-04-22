@@ -6,6 +6,13 @@
 #include "SinActivation.h"
 #define M_PI (3.1415926535)
 
+typedef struct {
+	int numMaterials;
+	bool optAmp;
+	bool optFreq;
+	bool optOff;
+}FlexConfig;
+
 
 class Simulation {
 public:
@@ -32,7 +39,6 @@ public:
 	void varySize();
 
 	bool readJSON(rapidjson::Value& o);
-	bool loadJSON(const char* jsonFilePath);
 	void writeJSON(rapidjson::PrettyWriter<rapidjson::StringBuffer>& w);
 
 	std::vector<Eigen::Vector2d> locationHistory;
@@ -48,11 +54,23 @@ public:
 	void writePosition(std::string filename);
 
 	typedef struct {
-		double x;
-		double y;
-		double z;
-		double temp;
+		Vec3D<double> position;
+		Quat3D<double> orientation;
+		double temperature;
 	} voxelState;
 
 	void setState(std::vector<voxelState> *li);
+
+	FlexConfig flexConfig;
+	void flexConfigInit(Eigen::VectorXd &params);
+
+	double fitnessStraight();
+
+	void record(double frameTime = 1.0 / 240.0);
+
+	double lastT = 0.0;
+
+	//std::vector<double> linearController 
+
+	void reset();
 };
